@@ -24,4 +24,4 @@ RUN apk --no-cache --update add \
 	asterisk
 
 
-CMD	["asterisk", "-fpvvvv"]
+CMD	["asterisk", "-fpvvvvv"]
