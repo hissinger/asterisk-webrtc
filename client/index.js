@@ -68,13 +68,15 @@ function onSipEvent(e) {
       // Play ringing sound
       document.getElementById("ringing-sound").play();
 
-      $("#register-screen").hide();
-      $("#calling-screen").hide();
+      // Show incoming call screen
       $("#dialing-screen").hide();
       $("#incoming-call-screen").show();
+
+      // Show caller name
+      $("#incoming-caller-name").text(
+        "From " + e.newSession.getRemoteFriendlyName()
+      );
     }
-  } else {
-    console.log("**************** SIP event: " + e.type);
   }
 }
 
@@ -103,10 +105,14 @@ function onSipEventSession(e) {
     // Stop ringing sound
     document.getElementById("ringing-sound").pause();
 
-    // Show in-call screen
+    // Show incall screen
     $("#dialing-screen, #incoming-call-screen, #calling-screen").hide();
-    $("#in-call-screen").show();
-    $("#call-info").text("In call with " + e.session.getRemoteFriendlyName());
+    $("#incall-screen").show();
+
+    // Show caller name
+    $("#incall-caller-name").text(
+      "In call with " + e.session.getRemoteFriendlyName()
+    );
   } else if (e.type === "terminated" && e.session === oSipSessionCall) {
     // Call ended
     oSipSessionCall = null;
@@ -116,7 +122,7 @@ function onSipEventSession(e) {
 
     // Show dialing screen
     $("#dialing-hangup-button").hide();
-    $("#calling-screen, #in-call-screen, #incoming-call-screen").hide();
+    $("#calling-screen, #incall-screen, #incoming-call-screen").hide();
     $("#dialing-screen").show();
   }
 }
@@ -142,7 +148,7 @@ $("#register-form").on("submit", function (e) {
   };
 
   // Create SIP stack
-  const serverIp = "192.168.123.75";
+  const serverIp = "192.168.0.1";
   sipStack = new SIPml.Stack({
     realm: serverIp, // your realm
     impi: username,
@@ -189,7 +195,7 @@ $("#accept-button").on("click", function (e) {
   }
 });
 
-$("#in-call-hangup-button").on("click", function (e) {
+$("#incall-hangup-button").on("click", function (e) {
   e.preventDefault();
 
   if (oSipSessionCall) {
