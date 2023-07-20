@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+    <!-- login screen -->
+    <div id="register-screen" class="container">
+        <h2>Register</h2>
+        <form id="register-form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+
+    <!-- dialing screen -->
+    <div id="dialing-screen" class="container" style="display:none;">
+        <h2>Dialing</h2>
+        <form id="dialing-form">
+            <div class="form-group">
+                <label for="number">Number:</label>
+                <input type="text" id="number" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Call</button>
+        </form>
+    </div>
+
+    <!-- calling screen -->
+    <div id="calling-screen" class="container" style="display:none;">
+        <h2>Calling...</h2>
+        <button id="calling-cancel-button" class="btn btn-danger">Cancel</button>
+    </div>
+
+    <!-- incoming call screen -->
+    <div id="incoming-call-screen" class="container" style="display:none;">
+        <h2>Incoming Call</h2>
+        <button id="accept-button" class="btn btn-primary">Accept</button>
+        <button id="decline-button" class="btn btn-danger">Decline</button>
+    </div>
+
+    <!-- in call screen -->
+    <div id="in-call-screen" class="container" style="display:none;">
+        <h2>In Call</h2>
+        <p id="call-info"></p>
+        <button id="in-call-hangup-button" class="btn btn-danger">Hangup</button>
+    </div>  
+    
+    <!-- remote audio -->
+    <audio id="audio_remote" autoplay="autoplay" />
+
+    <!-- ringing sound -->
+    <audio id="ringing-sound" src="ringing-sound.mp3" loop></audio>
+
+    <!-- scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="SIPml-api.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
