@@ -210,3 +210,41 @@ $("#decline-button, #calling-cancel-button").on("click", function (e) {
     oSipSessionCall.hangup();
   }
 });
+
+$("#btnMute").click(function (e) {
+  e.preventDefault();
+
+  const isMuted = !oSipSessionCall.bMute;
+
+  const result = oSipSessionCall.mute("audio", isMuted);
+  if (result !== 0) {
+    console.log("Failed to mute audio");
+    return;
+  }
+
+  if (isMuted) {
+    $(this).text("Mute");
+    $(this).removeClass("btn-secondary").addClass("btn-danger");
+  } else {
+    $(this).text("Unmute");
+    $(this).removeClass("btn-danger").addClass("btn-secondary");
+  }
+
+  oSipSessionCall.bMute = isMuted;
+});
+
+$("#btnSpeaker").click(function (e) {
+  e.preventDefault();
+
+  const isSpeakerOn = $("#audio_remote").prop("muted");
+
+  // Toggle speaker
+  $("#audio_remote").prop("muted", !isSpeakerOn);
+  if (isSpeakerOn) {
+    $(this).text("Speaker On");
+    $(this).removeClass("btn-secondary").addClass("btn-danger");
+  } else {
+    $(this).text("Speaker Off");
+    $(this).removeClass("btn-danger").addClass("btn-secondary");
+  }
+});
