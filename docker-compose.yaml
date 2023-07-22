@@ -6,10 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: asterisk
-    ports:
-      - "5060:5060/udp" # SIP
-      - "8088:8088" # PJSIP WebSocket
-      - "10000-10050:10000-10050/udp" # RTP
+    network_mode: host
     volumes:
       - ./asterisk:/etc/asterisk
       - ./asterisk/keys:/etc/asterisk/keys
