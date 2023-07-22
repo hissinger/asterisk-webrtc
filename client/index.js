@@ -1,11 +1,10 @@
 let oSipSessionRegister, oSipSessionCall;
 let sipStack;
 let db;
+const dbName = "sipClientDB";
+const storeName = "sipUserInfo";
 
 $(document).ready(function () {
-  const dbName = "sipClientDB";
-  const storeName = "sipUserInfo";
-
   // Initialize the IndexedDB
   let openRequest = indexedDB.open(dbName, 1);
 
@@ -134,8 +133,8 @@ $("#register-form").on("submit", function (e) {
   const password = $("#password").val();
 
   // Store data
-  let tx = db.transaction("sipUserInfo", "readwrite");
-  let store = tx.objectStore("sipUserInfo");
+  let tx = db.transaction(storeName, "readwrite");
+  let store = tx.objectStore(storeName);
 
   store.put({ id: 1, username: username, password: password });
 
@@ -148,7 +147,7 @@ $("#register-form").on("submit", function (e) {
   };
 
   // Create SIP stack
-  const serverIp = "192.168.0.1";
+  const serverIp = ""; // your server IP
   sipStack = new SIPml.Stack({
     realm: serverIp, // your realm
     impi: username,
